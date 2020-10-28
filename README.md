@@ -1,4 +1,4 @@
-# MEC-downscaling, Heiko Goelzer, 2020 (heig@norceresearch.no)
+## MEC-downscaling, Heiko Goelzer, 2020 (heig@norceresearch.no)
 Collection of scripts to downscale CLM MEC output to a high-resolution regional grid
 
 Based on MEC-downscaling-example by Leo van Kampenhout
@@ -21,49 +21,49 @@ A version of these scripts has been used in the paper [Present‐Day Greenland I
 
 This setup is prepared for use on fram or other SIGMA2 machines for NorESM
 
-## Workflow in ./scripts
+### Workflow in ./scripts
 
-setup.sh
-extract_variables.sh
-process_raw_vector.py
-convert_grid.sh
-apply_vertical_interpolation.py
-calc_SMB.sh
-
-
-## Python environment
-
-### Conda setup following (https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html)
-
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-bash Miniconda3-latest-Linux-x86_64.sh
-source /cluster/home/heig/miniconda3/bin/activate base
-conda config --set auto_activate_base false
-
-### Setting up miniconda
-conda install numpy
-conda install netCDF4
-conda install scipy
-conda install xarray
+setup.sh <br>
+extract_variables.sh <br>
+process_raw_vector.py <br>
+convert_grid.sh <br>
+apply_vertical_interpolation.py <br>
+calc_SMB.sh <br>
 
 
-## Setup fortran program for vertical interpolation 
-cd scripts
-f2py -c -m elevationclasses elevationclasses.F90
+### Python environment
+
+#### Conda setup following (https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html)
+
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh <br>
+bash Miniconda3-latest-Linux-x86_64.sh <br>
+source /cluster/home/heig/miniconda3/bin/activate base <br>
+conda config --set auto_activate_base false <br>
+
+#### Setting up miniconda
+conda install numpy <br>
+conda install netCDF4 <br>
+conda install scipy <br>
+conda install xarray <br>
+
+
+### Setup fortran program for vertical interpolation 
+cd scripts <br>
+f2py -c -m elevationclasses elevationclasses.F90 <br>
  
 
-## Shell environment
+### Shell environment
 
-module load CDO/1.9.5-intel-2018b
-module load NCO/4.7.9-intel-2018b
-module load ncview/2.1.7-intel-2018b
+module load CDO/1.9.5-intel-2018b <br>
+module load NCO/4.7.9-intel-2018b <br>
+module load ncview/2.1.7-intel-2018b <br>
 
 
-## Interactive usage
-### Consider working in an interactive shell
+### Interactive usage
+#### Consider working in an interactive shell
 srun --nodes=1 --time=00:30:00 --qos=devel --account=nn9252k --pty bash -i
 
-### Load Python environment
+#### Load Python environment
 source /cluster/home/heig/miniconda3/bin/activate base
 
 
