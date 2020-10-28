@@ -1,4 +1,4 @@
-### MEC-downscaling, Heiko Goelzer, 2020 (heig@norceresearch.no)
+# MEC-downscaling, Heiko Goelzer, 2020 (heig@norceresearch.no)
 Collection of scripts to downscale CLM MEC output to a high-resolution regional grid
 
 Based on MEC-downscaling-example by Leo van Kampenhout
@@ -33,14 +33,14 @@ calc_SMB.sh
 
 ## Python environment
 
-# Conda setup following (https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html)
+### Conda setup following (https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html)
 
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
 source /cluster/home/heig/miniconda3/bin/activate base
 conda config --set auto_activate_base false
 
-# Setting up miniconda
+### Setting up miniconda
 conda install numpy
 conda install netCDF4
 conda install scipy
@@ -60,10 +60,10 @@ module load ncview/2.1.7-intel-2018b
 
 
 ## Interactive usage
-# Consider working in an interactive shell
+### Consider working in an interactive shell
 srun --nodes=1 --time=00:30:00 --qos=devel --account=nn9252k --pty bash -i
 
-# Load Python environment
+### Load Python environment
 source /cluster/home/heig/miniconda3/bin/activate base
 
 
