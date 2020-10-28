@@ -37,7 +37,8 @@ calc_SMB.sh <br>
 
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh <br>
 bash Miniconda3-latest-Linux-x86_64.sh <br>
-source /cluster/home/heig/miniconda3/bin/activate base <br>
+source /cluster/home/heig/miniconda3/bin/activate base (fram) <br>
+source /nird/home/heig/miniconda3/bin/activate base (nird) <br>
 conda config --set auto_activate_base false <br>
 
 #### Setting up miniconda
@@ -64,6 +65,7 @@ module load ncview/2.1.7-intel-2018b <br>
 srun --nodes=1 --time=00:30:00 --qos=devel --account=nn9252k --pty bash -i
 
 #### Load Python environment
-source /cluster/home/heig/miniconda3/bin/activate base
+source /cluster/home/heig/miniconda3/bin/activate base (fram) <br>
+source /nird/home/heig/miniconda3/bin/activate base (nird) <br>
 
 
