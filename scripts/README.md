@@ -1,32 +1,33 @@
-# Process scripts
+## Process scripts
 
-Run in this order  
+### Run in this order  
 
-setup.sh
-extract_variables.sh
-process_raw_vector.py
-convert_grid.sh
-apply_vertical_interpolation.py
-calc_SMB.sh
+setup.sh <br>
+extract_variables.sh <br>
+process_raw_vector.py <br>
+convert_grid.sh <br>
+apply_vertical_interpolation.py <br>
+calc_SMB.sh <br>
 
-Or run setup and then as batch file run_batch.sh
-./setup/sh
-./run_batch.sh
+### Or run setup and then as batch file run_batch.sh
+./setup/sh <br>
+./run_batch.sh <br>
 
-# Set up parameters, input data and path environment
+
+### Set up parameters, input data and path environment
 ./setup.sh
 
-# Extract 3d elevation class information (level,lat,lon) from column files 
+### Extract 3d elevation class information (level,lat,lon) from column files 
 ./extract_variables.sh
 
-# Make 3-dimensional variables 
+### Make 3-dimensional variables 
 ./process_raw_vector.py
 
-# Conversion to regional grid
+### Conversion to regional grid
 ./convert_grid.sh
 
-# Run vertical interpolation
+### Run vertical interpolation
 ./apply_vertical_interpolation.py
 
-# Combine components to get SMB
+### Combine components to get SMB
 ./calc_SMB.sh
