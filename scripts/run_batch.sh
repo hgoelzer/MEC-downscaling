@@ -6,4 +6,4 @@
 ./convert_grid.sh
 ./apply_vertical_interpolation.py
 ./calc_SMB.sh
-
+./make_forcing_timeseries.sh
