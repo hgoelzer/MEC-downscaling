@@ -24,7 +24,9 @@ source ../params
 
 # We need TOPO_COL to extract EC surface elevations
 varlist="QICE SNOW QSNOFRZ QSNOMELT QICE_MELT QSOIL TOPO_COL"
-mkdir -p $scratchdir
+
+/bin/rm -r $scratchdir/s1_vector
+mkdir -p $scratchdir/s1_vector
 
 for i in `eval echo {${syear}..${eyear}..1}`; do
     year=$i

@@ -19,6 +19,7 @@
 import sys
 import glob
 import os, os.path
+import shutil
 from configparser import ConfigParser
 
 # Parsing config
@@ -56,6 +57,9 @@ stream_tag  = 'h2'
 
 outdir   = os.path.join(scratchdir, 's2_gridded3d') 
 
+# remove and recreate directory 
+if os.path.exists(outdir):
+   shutil.rmtree(outdir)    
 if not os.path.exists(outdir):
    os.makedirs(outdir)
 

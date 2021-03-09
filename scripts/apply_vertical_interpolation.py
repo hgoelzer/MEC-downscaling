@@ -8,6 +8,7 @@ projection of 3D gridded data to 2D using vertical interpolation
 import sys
 import glob
 import os, os.path
+import shutil
 #import subprocess 
 import xarray as xr
 import numpy as np
@@ -48,6 +49,12 @@ print(target_srf.shape)
 ######
 # END OF USER SETTINGS
 ######
+
+# remove and recreate directory 
+if os.path.exists(outdir):
+   shutil.rmtree(outdir)    
+if not os.path.exists(outdir):
+   os.makedirs(outdir)
 
 #for varname in varlist:
 for (casename, indir_var, outdir_var) in zip(casenames, indirs, outdirs):

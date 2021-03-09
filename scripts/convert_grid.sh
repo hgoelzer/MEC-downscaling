@@ -14,6 +14,10 @@ source ../params
 INDIR=$scratchdir/s2_gridded3d
 OUTDIR=$scratchdir/s3_regridded
 
+# clean up
+/bin/rm -r $OUTDIR
+mkdir -p $OUTDIR
+
 # Select variables to process
 FILES=$(ls $INDIR/*nc)
 #FILES=$(ls $INDIR/QICE_19*nc) # specific variable

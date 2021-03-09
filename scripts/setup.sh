@@ -4,15 +4,26 @@
 ######### User input
 
 # Run specific
-run=N1850frc2_SMB1
-syear=0001
-eyear=0010
+#run=NHISTpiaeroxid_f09_tn14_keyClim20201217
+#syear=1970
+#eyear=1999
+
+run=N1850frc2_betzy_v1
+syear=1200
+eyear=1205
+
+#/projects/NS9252K/noresm/cases/NHISTpiaeroxid_f09_tn14_keyClim20201217/lnd/hist/NHISTpiaeroxid_f09_tn14_keyClim20201217.clm2.h2.1850-02.nc
 
 # Path setup
 #filedir=/cluster/work/users/heig/archive/$run/lnd/hist # fram
 #scratchdir=/cluster/work/users/heig/archive/$run/lnd/hist/SMB1
-filedir=/projects/NS9252K/users/heig/NorESM/archive/$run/lnd/hist # nird
-scratchdir=/projects/NS9252K/users/heig/SMB/$run/SMB
+#filedir=/projects/NS9252K/users/heig/NorESM/archive/$run/lnd/hist # nird
+#filedir=/projects/NS9252K/noresm/cases/$run/lnd/hist
+#scratchdir=/projects/NS9252K/users/heig/SMB/$run/SMB
+
+filedir=/projects/NS9560K/users/heig/NorESM/archive/$run/lnd/hist # nird
+scratchdir=/projects/NS9560K/users/heig/SMB/$run/SMB
+
 # Target grid and elevation
 grid_file=../data/grid_CISM_GrIS_04000m.nc
 elev_file=../data/cism_topography.nc

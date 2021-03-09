@@ -1,9 +1,9 @@
 #!/bin/bash
 # Run processing chain
 
-./extract_variables.sh
-./process_raw_vector.py
-./convert_grid.sh
-./apply_vertical_interpolation.py
-./calc_SMB.sh
-./make_forcing_timeseries.sh
+./extract_variables.sh               # extract to s1_vector
+./process_raw_vector.py              # Process to s2_gridded3d
+./convert_grid.sh                    # convert to s3_regridded
+./apply_vertical_interpolation.py    # interpolate to s4_remapped
+./calc_SMB.sh                        # combine to s5_smb
+./make_forcing_timeseries.sh         # concat to s6_timeseries

@@ -21,6 +21,8 @@ source ../params
 # Directories with files from step before (can be symlink)
 INDIR=$scratchdir/s5_smb
 OUTDIR=$scratchdir/s6_timeseries
+
+/bin/rm -r $OUTDIR
 mkdir -p ${OUTDIR} 
 
 # Select variables to process
@@ -32,29 +34,24 @@ OUTFILE=${OUTDIR}/smb_${syear}-${eyear}_${run}.nc
 echo $FILES
 
 # concat
-#for afile in $FILES; do
-#    ncecat -O -u time $afile $afile
-#done
 ncrcat -O -v SMB $FILES ${OUTFILE}
 
-# remove unused vars
-ncks -C -O -x -v lon,lat,lon_bnds,lat_bnds ${OUTFILE} ${OUTFILE}
+# Work in netcdf3 as a workaround of renaming problems 
+ncks -O -h -3 ${OUTFILE} tmp.nc
 
 # rename variables and dims
-ncrename -v SMB,smb ${OUTFILE} 
-#ncrename -v lala,smb ${OUTFILE} 
-ncrename -d x,x1 ${OUTFILE} 
-ncrename -d y,y1 ${OUTFILE} 
+ncrename -v SMB,smb tmp.nc 
+ncrename -O -d x,x1 -d y,y1 tmp.nc 
 
 # Make a time axis
-ncap2 -O -v -s "time=array(${syear},1,\$time)" ${OUTFILE} ${OUTDIR}/time_${syear}-${eyear}.nc
-ncks -A -v time ${OUTDIR}/time_${syear}-${eyear}.nc ${OUTFILE} 
+ncap2 -O -v -s "time=array(${syear},1,\$time)" tmp.nc  ${OUTDIR}/time_${syear}-${eyear}.nc
+ncks -A -v time ${OUTDIR}/time_${syear}-${eyear}.nc tmp.nc  
 
 # Add diemsion variables
-# workaround for HDF error: move to classic model
-nccopy -k classic ${OUTFILE} tmp.nc
 ncks -A -v x1,y1 x1y1_04km.nc tmp.nc
-mv tmp.nc ${OUTFILE}
+
+# Back to netcdf4
+ncks -O -h -4 tmp.nc ${OUTFILE}
  
 # Unit conversion
 ncap2 -O -s "smb=smb*31556926" ${OUTFILE} ${OUTFILE}
