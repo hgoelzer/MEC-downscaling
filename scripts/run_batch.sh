@@ -7,3 +7,6 @@
 ./apply_vertical_interpolation.py    # interpolate to s4_remapped
 ./calc_SMB.sh                        # combine to s5_smb
 ./make_forcing_timeseries.sh         # concat to s6_timeseries
+
+./calc_ARTM.sh                       # combine to s7_art
+./make_artm_forcing_timeseries.sh    # concat to s8_timeseries

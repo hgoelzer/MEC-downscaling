@@ -66,8 +66,8 @@ if not os.path.exists(outdir):
 print(run)
 
 varlist = []
-varlist += 'SNOW QSNOFRZ QSNOMELT QICE_MELT QSOIL TOPO_COL'.split()
-
+#varlist += 'SNOW QSNOFRZ QSNOMELT QICE_MELT QSOIL TOPO_COL'.split()
+varlist += 'SNOW QSNOFRZ QSNOMELT QICE_MELT QSOIL TOPO_COL TG TSA'.split()
 
 for slic in slices:
    print(slic)

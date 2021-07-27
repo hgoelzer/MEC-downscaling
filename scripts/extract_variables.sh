@@ -23,7 +23,8 @@ source ../params
 #varlist="TOPO_COL"
 
 # We need TOPO_COL to extract EC surface elevations
-varlist="QICE SNOW QSNOFRZ QSNOMELT QICE_MELT QSOIL TOPO_COL"
+#varlist="QICE SNOW QSNOFRZ QSNOMELT QICE_MELT QSOIL TOPO_COL"
+varlist="QICE SNOW QSNOFRZ QSNOMELT QICE_MELT QSOIL TOPO_COL TG TSA"
 
 /bin/rm -r $scratchdir/s1_vector
 mkdir -p $scratchdir/s1_vector

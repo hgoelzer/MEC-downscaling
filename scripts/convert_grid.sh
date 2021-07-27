@@ -30,16 +30,46 @@ echo $FILES
 set -- $FILES
 FILE1=$1 
 
-# Pre-compute interpolation weights
-cdo genbil,${grid_file} $FILE1 weights.nc
+if [[ ${opt_fill} -eq 0 ]]; then
+    # Pre-compute interpolation weights
+    echo "# Don't fill missing values"
+    cdo genbil,${grid_file} $FILE1 weights.nc
+
+elif [[ ${opt_fill} -eq 1 ]]; then
+    # extrapolate to fill missing values
+    echo "# fill missing values with cdo fillmiss"
+    cdo fillmiss $FILE1 filled_tmp.nc
+    # Pre-compute interpolation weights
+    cdo genbil,${grid_file} filled_tmp.nc  weights.nc
+
+elif [[ ${opt_fill} -eq 2 ]]; then
+    # extrapolate to fill missing values
+    echo "# fill missing values with cdo fillmiss2"
+    cdo fillmiss2,2 $FILE1 filled_tmp.nc
+    # Pre-compute interpolation weights
+    cdo genbil,${grid_file} filled_tmp.nc  weights.nc
+fi
 
 # Main loop
 for FILE in $FILES; do
    FNAME=$(basename $FILE)
    NEWFILE=$OUTDIR/$FNAME
 
+   if [[ ${opt_fill} -eq 0 ]]; then
+       cdo --format nc4 -b F32 remap,${grid_file},weights.nc $FILE $NEWFILE
+
+   elif [[ ${opt_fill} -eq 1 ]]; then
+   # extrapolate to fill missing values
+   cdo fillmiss $FILE filled_tmp.nc
+   cdo --format nc4 -b F32 remap,${grid_file},weights.nc filled_tmp.nc $NEWFILE
+
+   elif [[ ${opt_fill} -eq 2 ]]; then
+   # extrapolate to fill missing values
+   cdo fillmiss2,2 $FILE filled_tmp.nc
    # Remap directly
    #cdo remapbil,${grid_file} $FILE $NEWFILE
-   # Or USE PRECOMPUTED WEIGHTS
-   cdo --format nc4 -b F32 remap,${grid_file},weights.nc $FILE $NEWFILE
+   cdo --format nc4 -b F32 remap,${grid_file},weights.nc filled_tmp.nc $NEWFILE
+
+fi
+
 done

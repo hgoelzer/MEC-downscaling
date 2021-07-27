@@ -22,8 +22,7 @@ for ayear in `eval echo {${syear}..${eyear}..1}`; do
 # remove unused vars
 ncks -C -O -x -v lon,lat,lon_bnds,lat_bnds ${OUTDIR}/SMB_${ayear}_${run}.nc ${OUTDIR}/SMB_${ayear}_${run}.nc
     
-# add components change units from mm/s to mm/yr w.e.
-    ncap2 -O -s "SMB=(SNOW+QSNOFRZ-QSNOMELT-QICE_MELT-QSOIL)" ${OUTDIR}/SMB_${ayear}_${run}.nc ${OUTDIR}/SMB_${ayear}_${run}.nc
+# add components 
     ncap2 -O -s "SMB=(SNOW+QSNOFRZ-QSNOMELT-QICE_MELT-QSOIL)" ${OUTDIR}/SMB_${ayear}_${run}.nc ${OUTDIR}/SMB_${ayear}_${run}.nc
 
     # make axis

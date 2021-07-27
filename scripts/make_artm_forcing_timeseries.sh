@@ -1,5 +1,5 @@
 #!/bin/bash
-# Make an SMB forcing tiem series
+# Make an ARTM forcing time series
 
 set -x
 set -e
@@ -19,8 +19,8 @@ source ../params
 
 ###
 # Directories with files from step before (can be symlink)
-INDIR=$scratchdir/s5_smb
-OUTDIR=$scratchdir/s6_timeseries
+INDIR=$scratchdir/s7_artm
+OUTDIR=$scratchdir/s8_timeseries_artm
 
 /bin/rm -r $OUTDIR
 mkdir -p ${OUTDIR} 
@@ -29,19 +29,19 @@ mkdir -p ${OUTDIR}
 FILES=$(ls $INDIR/*nc)
 
 # target file
-OUTFILE=${OUTDIR}/smb_${syear}-${eyear}_${run}.nc
-OUTFILE_ltm=${OUTDIR}/smb_ltm_${syear}-${eyear}_${run}.nc
+OUTFILE=${OUTDIR}/artm_${syear}-${eyear}_${run}.nc
+OUTFILE_ltm=${OUTDIR}/artm_ltm_${syear}-${eyear}_${run}.nc
 
 echo $FILES
 
 # concat
-ncrcat -O -v SMB $FILES ${OUTFILE}
+ncrcat -O -v ARTM $FILES ${OUTFILE}
 
 # Work in netcdf3 as a workaround of renaming problems 
 ncks -O -h -3 ${OUTFILE} tmp.nc
 
 # rename variables and dims
-ncrename -v SMB,smb tmp.nc 
+ncrename -v ARTM,artm tmp.nc 
 ncrename -O -d x,x1 -d y,y1 tmp.nc 
 
 # Make a time axis
@@ -54,10 +54,10 @@ ncks -A -v x1,y1 x1y1_04km.nc tmp.nc
 # Back to netcdf4
 ncks -O -h -4 tmp.nc ${OUTFILE}
  
-# Unit conversion
-ncap2 -O -s "smb=smb*31556926" ${OUTFILE} ${OUTFILE}
-ncatted -h -a units,smb,o,c,"mm/yr water equivalent" ${OUTFILE} 
-ncatted -h -a coordinates,smb,d,, ${OUTFILE} 
+# Unit conversion ?
+#ncap2 -O -s "artm=artm" ${OUTFILE} ${OUTFILE}
+ncatted -h -a units,artm,o,c,"degree_Celsius" ${OUTFILE} 
+ncatted -h -a coordinates,artm,d,, ${OUTFILE} 
 
 # make long term average
 ncra -d time,0 ${OUTFILE} ${OUTFILE_ltm}
@@ -65,12 +65,12 @@ ncra -d time,0 ${OUTFILE} ${OUTFILE_ltm}
 
 ### Masking
 ## create mask time series
-#ncks -v smb -d time,0 output.nc smb_ref.nc
-#cp smb_ref.nc  smb_ref2.nc
-#ncrcat smb_ref.nc smb_ref2.nc smb0.nc
-#for i in {1..119}; do  /bin/mv smb0.nc smb_ref2.nc; ncrcat smb_ref.nc smb_ref2.nc smb0.nc; done 
+#ncks -v artm -d time,0 output.nc artm_ref.nc
+#cp artm_ref.nc  artm_ref2.nc
+#ncrcat artm_ref.nc artm_ref2.nc artm0.nc
+#for i in {1..119}; do  /bin/mv artm0.nc artm_ref2.nc; ncrcat artm_ref.nc artm_ref2.nc artm0.nc; done 
 ## add time axis 
-#ncks -A -v time time_1850-1969.nc smb0.nc
-#ncks -A -v smb_ref smb0.nc ${OUTFILE} 
-#ncap2 -O -s "where (smb_ref==-2000) smb=-2000" ${OUTFILE} ${OUTFILE} 
-#ncks -C -O -x -v smb_ref ${OUTFILE} ${OUTFILE} 
+#ncks -A -v time time_1850-1969.nc artm0.nc
+#ncks -A -v artm_ref artm0.nc ${OUTFILE} 
+#ncap2 -O -s "where (artm_ref==-2000) artm=-2000" ${OUTFILE} ${OUTFILE} 
+#ncks -C -O -x -v artm_ref ${OUTFILE} ${OUTFILE} 
