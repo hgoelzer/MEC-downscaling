@@ -15,12 +15,20 @@ import numpy as np
 from netCDF4 import Dataset, default_fillvals
 import elevationclasses as ec
 from configparser import ConfigParser
+import argparse
+
+# Parsing command line argument: parameter filename 
+parser = argparse.ArgumentParser()
+parser.add_argument("paramsfile")
+args = parser.parse_args()
+params_filename=args.paramsfile
+print(params_filename)
 
 print(dir(ec))
 
 # Parsing config
 config = ConfigParser()
-with open("../params") as stream:
+with open(params_filename) as stream:
     config.read_string("[top]\n" + stream.read())  # append header
 top = config['top']
 run = top['run']

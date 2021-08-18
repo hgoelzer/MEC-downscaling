@@ -7,9 +7,16 @@
 # module load CDO/1.9.5-intel-2018b
 # module load NCO/4.7.9-intel-2018b
 
+params=$1
+
+if [ ! -f ${params} ]; then
+    echo Error: parameter file $params not found, exiting! 
+    exit
+fi
+
 ## User settings
 
-source ../params
+source $params
 #run=N1850frc2_SMB1
 #syear=0001
 #eyear=0002

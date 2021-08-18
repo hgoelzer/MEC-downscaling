@@ -1,36 +1,22 @@
 #!/bin/bash
 # Set up input files and directory structure
 
+######### Basic setup
+
+mec_dir=/nird/home/heig/process/MEC-downscaling
+
 ######### User input
 
-# Run specific
-#run=NHISTpiaeroxid_f09_tn14_keyClim20201217
-#syear=1970
-#eyear=1999
-
-run=N1850frc2G_f19_tn14_gl4_SMB1_purr
-syear=1700
-eyear=1729
-
-#run=N1850frc2G_f09_tn14_gl4_SMB1_pro1
-#syear=1700
-#eyear=1729
-
-# NorESM betzy archive
-filedir=/cluster/work/users/heig/archive/$run/lnd/hist
-scratchdir=/cluster/projects/nn9560k/heig/smb/${run}_t/MEC
-
-# NorESM fram 
-#filedir=/cluster/work/users/heig/archive/$run/lnd/hist 
-
-# NorESM nird
-#filedir=/projects/NS9560K/users/heig/NorESM/archive/$run/lnd/hist # nird
-#scratchdir=/projects/NS9560K/users/heig/SMB/$run/SMB
+run=N1850frc2G_f19_tn14_gl4_SMB1_mask
+syear=1800
+eyear=1850
+filedir=/projects/NS9560K/users/heig/NorESM/archive/$run/lnd/hist # nird
+scratchdir=/projects/NS9560K/users/heig/SMB/${run}_${syear}-${eyear}
 
 
 # Target grid and elevation
-grid_file=../data/grid_CISM_GrIS_04000m.nc
-elev_file=../data/cism_topography.nc
+grid_file=${mec_dir}/data/grid_CISM_GrIS_04000m.nc
+elev_file=${mec_dir}/data/cism_topography.nc
 elev_varname=topg
 
 # Options
@@ -40,18 +26,26 @@ opt_fill=1
 
 ###############
 
+# Set up 
+if [ -d ${scratchdir} ]; then
+    echo Error: directory ${scratchdir} exists, exiting! 
+    exit
+else
+    mkdir -p ${scratchdir}
+fi
+
 # Create param file
-echo "# Generated params file" > params.tmp
-echo "run="${run} >> params.tmp
-echo "syear="${syear} >> params.tmp
-echo "eyear="${eyear} >> params.tmp
-echo "filedir="${filedir} >> params.tmp
-echo "scratchdir="${scratchdir} >> params.tmp
-echo "grid_file="${grid_file} >> params.tmp
-echo "elev_file="${elev_file} >> params.tmp
-echo "elev_varname="${elev_varname} >> params.tmp
-echo "opt_fill="${opt_fill} >> params.tmp
-cat params.tmp
+echo "# Generated params file" > ${scratchdir}/params.txt
+echo "run="${run} >> ${scratchdir}/params.txt
+echo "syear="${syear} >> ${scratchdir}/params.txt
+echo "eyear="${eyear} >> ${scratchdir}/params.txt
+echo "filedir="${filedir} >> ${scratchdir}/params.txt
+echo "scratchdir="${scratchdir} >> ${scratchdir}/params.txt
+echo "grid_file="${grid_file} >> ${scratchdir}/params.txt
+echo "elev_file="${elev_file} >> ${scratchdir}/params.txt
+echo "elev_varname="${elev_varname} >> ${scratchdir}/params.txt
+echo "opt_fill="${opt_fill} >> ${scratchdir}/params.txt
+cat ${scratchdir}/params.txt
 
 # Create paths
 mkdir -p ${scratchdir}/s1_vector
@@ -63,5 +57,8 @@ mkdir -p ${scratchdir}/s6_timeseries
 mkdir -p ${scratchdir}/s7_artm
 mkdir -p ${scratchdir}/s8_timeseries_artm
 
-# set up
-/bin/cp params.tmp ../params
+#
+echo parameter file: ${scratchdir}/params.txt
+
+echo "!!! Remember python setup !!!"
+echo "source ~/miniconda3/bin/activate base"

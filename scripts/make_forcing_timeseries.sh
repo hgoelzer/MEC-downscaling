@@ -8,9 +8,16 @@ set -e
 # Currently on fram
 # module load NCO/4.7.9-intel-2018b
 
-## User settings
+params=$1
 
-source ../params
+if [ ! -f ${params} ]; then
+    echo Error: parameter file $params not found, exiting! 
+    exit
+fi
+
+## User settings
+source $params
+
 #run=N1850frc2_SMB1
 #syear=0001
 #eyear=0002

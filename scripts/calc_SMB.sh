@@ -5,8 +5,15 @@
 set -x
 set -e
 
-# Read user settings
-source ../params
+params=$1
+
+if [ ! -f ${params} ]; then
+    echo Error: parameter file $params not found, exiting! 
+    exit
+fi
+## User settings
+source $params
+
 
 # Directories with files from step before (can be symlink)
 INDIR=$scratchdir/s4_remapped

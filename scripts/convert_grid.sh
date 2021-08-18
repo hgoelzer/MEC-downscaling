@@ -6,7 +6,16 @@
 #set -x
 set -e
 
-source ../params
+params=$1
+
+if [ ! -f ${params} ]; then
+    echo Error: parameter file $params not found, exiting! 
+    exit
+fi
+
+## User settings
+source $params
+
 # ln -s /cluster/work/users/heig/archive/N1850frc2_SMB1/lnd/hist/vregrid ./output
 # ln -s /cluster/work/users/heig/archive/N1850frc2_SMB1/lnd/hist/vector2gridded3d ./input
 
@@ -54,7 +63,7 @@ fi
 for FILE in $FILES; do
    FNAME=$(basename $FILE)
    NEWFILE=$OUTDIR/$FNAME
-
+   echo $FILE
    if [[ ${opt_fill} -eq 0 ]]; then
        cdo --format nc4 -b F32 remap,${grid_file},weights.nc $FILE $NEWFILE
 
