@@ -60,5 +60,6 @@ mkdir -p ${scratchdir}/s8_timeseries_artm
 #
 echo parameter file: ${scratchdir}/params.txt
 
+echo "Run with ./run_batch.sh ${scratchdir}/params.txt"
 echo "!!! Remember python setup !!!"
 echo "source ~/miniconda3/bin/activate base"
