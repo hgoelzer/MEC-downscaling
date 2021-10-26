@@ -37,7 +37,7 @@ FILES=$(ls $INDIR/*nc)
 
 # target file
 OUTFILE=${OUTDIR}/smb_${syear}-${eyear}_${run}.nc
-OUTFILE_ltm=${OUTDIR}/smb_ltm_${syear}-${eyear}_${run}.nc
+OUTFILE_ltm=${OUTDIR}/smb_ltm0_${syear}-${eyear}_${run}.nc
 
 echo $FILES
 
@@ -67,7 +67,7 @@ ncatted -h -a units,smb,o,c,"mm/yr water equivalent" ${OUTFILE}
 ncatted -h -a coordinates,smb,d,, ${OUTFILE} 
 
 # make long term average
-ncra -d time,0 ${OUTFILE} ${OUTFILE_ltm}
+ncra -d time,0,-1 ${OUTFILE} ${OUTFILE_ltm}
 
 
 ### Masking

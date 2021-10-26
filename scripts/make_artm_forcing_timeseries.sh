@@ -38,7 +38,7 @@ FILES=$(ls $INDIR/*nc)
 
 # target file
 OUTFILE=${OUTDIR}/artm_${syear}-${eyear}_${run}.nc
-OUTFILE_ltm=${OUTDIR}/artm_ltm_${syear}-${eyear}_${run}.nc
+OUTFILE_ltm=${OUTDIR}/artm_ltm0_${syear}-${eyear}_${run}.nc
 
 echo $FILES
 
@@ -68,7 +68,7 @@ ncatted -h -a units,artm,o,c,"degree_Celsius" ${OUTFILE}
 ncatted -h -a coordinates,artm,d,, ${OUTFILE} 
 
 # make long term average
-ncra -d time,0 ${OUTFILE} ${OUTFILE_ltm}
+ncra -d time,0,-1 ${OUTFILE} ${OUTFILE_ltm}
 
 
 ### Masking
