@@ -56,6 +56,8 @@ mkdir -p ${scratchdir}/s5_smb
 mkdir -p ${scratchdir}/s6_timeseries
 mkdir -p ${scratchdir}/s7_artm
 mkdir -p ${scratchdir}/s8_timeseries_artm
+mkdir -p ${scratchdir}/s9_t2m
+mkdir -p ${scratchdir}/s10_timeseries_t2m
 
 #
 echo parameter file: ${scratchdir}/params.txt

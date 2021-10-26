@@ -19,6 +19,8 @@ calc_SMB.sh <param_file> <br>
 make_forcing_timeseries.sh <param_file> <br>
 calc_ARTM.sh <param_file> <br>
 make_artm_forcing_timeseries.sh <param_file> <br>
+calc_T2M.sh <param_file> <br>
+make_t2m_forcing_timeseries.sh <param_file> <br>
 
 
 ## Or run setup and then as batch file run_batch.sh
@@ -47,8 +49,14 @@ make_artm_forcing_timeseries.sh <param_file> <br>
 ### Make SMB time series forcing record
 ./make_forcing_timeseries.sh
 
-### Combine components to get ARTM
+### Calculate ARTM
 ./calc_ARTM.sh
 
 ### Make ARTM time series forcing record
 ./make_artm_forcing_timeseries.sh 
+
+### Calculate T2M
+./calc_T2M.sh
+
+### Make T2M time series forcing record
+./make_t2m_forcing_timeseries.sh 

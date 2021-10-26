@@ -26,8 +26,13 @@ fi
 ./calc_SMB.sh ${params}
 # concat to s6_timeseries
 ./make_forcing_timeseries.sh ${params}
-# combine to s7_art
+# combine to s7_artm
 ./calc_ARTM.sh ${params}
-# concat to s8_timeseries
+# concat to s8_timeseries_artm
 ./make_artm_forcing_timeseries.sh ${params}    
+
+# combine to s9_t2m
+./calc_T2M.sh ${params}
+# concat to s10_timeseries_t2m
+./make_t2m_forcing_timeseries.sh ${params}    
 
