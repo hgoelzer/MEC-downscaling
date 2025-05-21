@@ -1,6 +1,6 @@
 #!/bin/bash
-# Combine fields to calucalte SMB
-# SMB = SNOW + QSNOFRZ - QSNOMELT - QICE_MELT – QSOIL
+# Combine fields to caluculate SMB
+# SMB = SNOW + QSNOFRZ - QSNOMELT - QICE_MELT - QSOIL
 
 set -x
 set -e

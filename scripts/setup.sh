@@ -3,14 +3,14 @@
 
 ######### Basic setup
 
-mec_dir=/nird/home/heig/process/MEC-downscaling
+mec_dir=/nird/projects/NS8006K/MEC/MEC-downscaling-monthly
 
 ######### User input
 
-run=N1850frc2G_f19_tn14_gl4_SMB1_mask
-syear=1800
-eyear=1850
-filedir=/projects/NS9560K/users/heig/NorESM/archive/$run/lnd/hist # nird
+run=N1850frc2G_f09_tn14_gl4_SMB1_cebi
+syear=1830
+eyear=1831
+filedir=/datalake/NS9560K/users/heig/NorESM/archive/$run/lnd/hist # nird
 scratchdir=/projects/NS9560K/users/heig/SMB/${run}_${syear}-${eyear}
 
 
